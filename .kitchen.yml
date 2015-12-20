@@ -1,0 +1,33 @@
+---
+driver:
+  name: vagrant
+
+  name: vagrant
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-14.04
+
+  - name: amazon
+    driver:
+      name: ec2
+      aws_ssh_key_id: <%= ENV['aws_ssh_key_id']%>
+      shared_credentials_profile: <%= ENV['shared_credentials_profile'] %>
+      iam_profile_name: <%= ENV['iam_profile_name'] %>
+      ssh_key: <%= ENV['ssh_key'] %>
+      username: ec2-user
+      region: us-east-1
+      instance_type: t2.micro
+      availability_zone: us-east-1c
+      require_chef_omnibus: true
+      security_group_ids: <%= ENV['security_group_ids']%>
+      image_id: <%= ENV['image_id'] %>
+
+
+suites:
+  - name: default
+    run_list:
+      - recipe[aws-cookbook::default]
+    attributes:
+
