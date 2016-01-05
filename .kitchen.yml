@@ -28,6 +28,8 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[jenkins::master]
+      - recipe[jenkins::java]
       - recipe[aws-cookbook::default]
-    attributes:
 
+    attributes:
