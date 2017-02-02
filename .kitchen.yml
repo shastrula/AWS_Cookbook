@@ -16,7 +16,7 @@ platforms:
       shared_credentials_profile: <%= ENV['shared_credentials_profile'] %>
       iam_profile_name: <%= ENV['iam_profile_name'] %>
       ssh_key: <%= ENV['ssh_key'] %>
-      username: ec2-user
+      transport.username: ec2-user
       region: us-east-1
       instance_type: t2.micro
       availability_zone: us-east-1c
