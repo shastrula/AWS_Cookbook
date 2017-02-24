@@ -1,35 +1,32 @@
----
 driver:
-  name: vagrant
+  name: ec2
+  aws_ssh_key_id: <%= ENV['AWS_SSH_KEY_ID'] %>
+  region: us-east-1
+  availability_zone: us-east-1c
+  require_chef_omnibus: true
+  security_group_ids: <%= ENV['SECURITY_GROUP_IDS'] %>
+  associate_public_ip: true
+  interface: dns
 
-  name: vagrant
 provisioner:
   name: chef_solo
 
 platforms:
-  - name: ubuntu-14.04
+  - name: ubuntu-16.04
+    driver:
+          name: vagrant
 
   - name: amazon
     driver:
-      name: ec2
-      aws_ssh_key_id: <%= ENV['aws_ssh_key_id']%>
-      shared_credentials_profile: <%= ENV['shared_credentials_profile'] %>
-      iam_profile_name: <%= ENV['iam_profile_name'] %>
-      ssh_key: <%= ENV['ssh_key'] %>
-      transport.username: ec2-user
-      region: us-east-1
-      instance_type: t2.micro
-      availability_zone: us-east-1c
-      require_chef_omnibus: true
-      security_group_ids: <%= ENV['security_group_ids']%>
-      image_id: <%= ENV['image_id'] %>
-
+      image_id: <%= ENV['AWS_IMAGE_ID'] %>
+    transport:
+      username: ec2-user
+      ssh_key: ../ec2_keys/<%= ENV['AWS_SSH_KEY_ID'] %>.pem
 
 suites:
   - name: default
     run_list:
       - recipe[jenkins::master]
-      - recipe[jenkins::java]
       - recipe[aws-cookbook::default]
 
     attributes:

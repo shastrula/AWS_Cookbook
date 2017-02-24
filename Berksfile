@@ -6,4 +6,4 @@ metadata
 
 cookbook "tomcat7"
 
-cookbook 'jenkins', '~> 2.4.1'
+#cookbook 'jenkins', '~> 2.4.1'
