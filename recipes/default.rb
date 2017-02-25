@@ -1,12 +1,4 @@
-package 'tomcat7' do
-  action :install
-end
-
-package 'tomcat7-webapps' do
-  action :install
-end
-
-package 'tomcat7-admin-webapps' do
+package ['tomcat7', 'tomcat7-webapps', 'tomcat7-admin-webapps' ] do
   action :install
 end
 
